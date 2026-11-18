@@ -1,0 +1,9 @@
+{
+  "name": "gamehub-rooms",
+  "version": "3.0.0",
+  "description": "Always-on room server for Game Hub",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" },
+  "dependencies": { "ws": "^8.18.0" }
+}
