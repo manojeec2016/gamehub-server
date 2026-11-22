@@ -16,7 +16,7 @@ a.b{display:block;padding:15px;border-radius:14px;background:#1fb07c;color:#fff;
 <p id="how">Or open Game Hub, pick the game, and type the room code.</p></div>
 <script>
 /* Invite link: join.html?g=<game>&c=<CODE>. "Open in Game Hub" opens the app straight into the room. */
-const GAMES={ludo:'Ludo',snakes:'Snakes & Ladders',ttt:'Tic Tac Toe',bingo:'Bingo'};
+const GAMES={ludo:'Ludo',snakes:'Snakes & Ladders',ttt:'Tic Tac Toe',bingo:'Bingo',four:'Four in a Row',dots:'Dots and Boxes'};
 const q=new URLSearchParams(location.search), g=q.get('g'), c=(q.get('c')||'').toUpperCase();
 if(GAMES[g]&&/^[A-Z0-9]{6}$/.test(c)){
   document.getElementById('t').textContent='Join '+GAMES[g];
