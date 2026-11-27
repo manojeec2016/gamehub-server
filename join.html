@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Join my game · Game Hub</title>
+<meta property="og:title" content="Join my game on Game Hub">
+<meta property="og:description" content="Tap to open the room in the Game Hub app.">
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#12142b;color:#eef0ff;font:16px system-ui,sans-serif;padding:20px;box-sizing:border-box}
+.c{max-width:360px;width:100%;background:#1f2350;border:1px solid #2f3570;border-radius:22px;padding:24px;text-align:center;display:flex;flex-direction:column;gap:14px}
+h1{margin:0;font-size:26px}p{margin:0;color:#9aa0c8;line-height:1.45}.code{font:800 34px monospace;letter-spacing:6px;color:#f5b52a}
+a.b{display:block;padding:15px;border-radius:14px;background:#1fb07c;color:#fff;font-weight:700;text-decoration:none;font-size:18px}
+.warn{background:#3a2a10;color:#ffd166;border-radius:12px;padding:10px}
+</style></head><body><div class="c" id="card">
+<h1 id="t">Join a game</h1><p>Your friend invited you to a game on Game Hub.</p><div class="code" id="code">······</div>
+<p class="warn" id="noapp" hidden>Game Hub is not installed on this phone. Ask your friend to send you the Game Hub app, install it, then tap the invite link again.</p>
+<a class="b" id="open" href="#">Open in Game Hub</a>
+<p id="how">Or open Game Hub, pick the game, and type the room code.</p></div>
+<script>
+/* Invite link: join.html?g=<game>&c=<CODE>. "Open in Game Hub" opens the app straight into the room. */
+const GAMES={ludo:'Ludo',snakes:'Snakes & Ladders',ttt:'Tic Tac Toe',bingo:'Bingo',four:'Four in a Row',dots:'Dots and Boxes'};
+const q=new URLSearchParams(location.search), g=q.get('g'), c=(q.get('c')||'').toUpperCase();
+if(GAMES[g]&&/^[A-Z0-9]{6}$/.test(c)){
+  document.getElementById('t').textContent='Join '+GAMES[g];
+  document.getElementById('code').textContent=c;
+  document.getElementById('how').textContent='Or open Game Hub, go to '+GAMES[g]+', and type the room code.';
+  if(q.get('noapp'))document.getElementById('noapp').hidden=false;
+  const back=location.origin+location.pathname+'?g='+g+'&c='+c+'&noapp=1';
+  document.getElementById('open').href='intent://join/'+g+'/'+c+'#Intent;scheme=gamehub;package=com.manoj.gamehub;S.browser_fallback_url='+encodeURIComponent(back)+';end';
+}else{
+  document.getElementById('t').textContent='Link not complete';
+  document.getElementById('code').hidden=true;document.getElementById('open').hidden=true;
+  document.getElementById('how').textContent='Open Game Hub and type the room code your friend sent.';
+}
+</script></body></html>
